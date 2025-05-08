@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <title>The Bender</title>
   <style>
+    @font-face {
+      font-family: 'Microgramma';
+      src: url('MicrogrammaD-BoldExte.otf') format('opentype');
+    }
+
     html, body {
       height: 100%;
       margin: 0;
@@ -11,56 +16,89 @@
       background-color: black;
     }
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Microgramma', sans-serif;
       background-image: url('albumart.png');
       background-repeat: no-repeat;
-      background-position: center;
+      background-position: top center;
       background-size: contain;
-      background-color: black;
       color: #fff;
       text-align: center;
       padding: 2em;
     }
-    .overlay {
+    .player-section {
+      position: relative;
+      margin-top: 50vh;
       background-color: rgba(0, 0, 0, 0.6);
       padding: 2em;
       border-radius: 1em;
       max-width: 700px;
-      margin: auto;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .player-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2em;
+      margin-bottom: 1.5em;
+    }
+    .player-wrapper span {
+      font-size: 1.2em;
+      color: #aaa;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    .player-wrapper span:hover {
+      color: #fff;
     }
     audio {
-      width: 100%;
-      margin-top: 1em;
+      width: 60%;
+    }
+    #playlist {
+      text-align: left;
+      margin: 0 auto;
+      max-width: 400px;
     }
     .track {
-      margin: 1em 0;
+      margin: 1.2em 0;
       cursor: pointer;
       color: #9cf;
+      font-size: 1em;
+      text-shadow: 0 0 4px #0ff;
+      transition: all 0.2s ease;
     }
     .track:hover {
+      color: #fff;
+      text-shadow: 0 0 6px #0ff;
+    }
+    .track.active {
+      color: #fff;
+      font-weight: bold;
       text-decoration: underline;
+      text-shadow: 0 0 8px #0ff;
     }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <h1>The Bender</h1>
-    <div id="player-container">
+  <div class="player-section">
+    <div class="player-wrapper">
+      <span onclick="previousTrack()" title="Previous Track">Previous</span>
       <audio id="audio" controls autoplay></audio>
-      <div id="playlist">
-        <div class="track" onclick="playTrack('Airbag.mp3')">Airbag</div>
-        <div class="track" onclick="playTrack('Burn the Witch.mp3')">Burn the Witch</div>
-        <div class="track" onclick="playTrack('Everything In Its Right Place.mp3')">Everything In Its Right Place</div>
-        <div class="track" onclick="playTrack('There There.mp3')">There There</div>
-        <div class="track" onclick="playTrack('Let Down.mp3')">Let Down</div>
-        <div class="track" onclick="playTrack('Hail to the Thief.mp3')">Hail to the Thief</div>
-        <div class="track" onclick="playTrack('Jigsaw Falling Into Place (Radio Edit).mp3')">Jigsaw Falling Into Place (Radio Edit)</div>
-        <div class="track" onclick="playTrack('How to Disappear Completely.mp3')">How to Disappear Completely</div>
-        <div class="track" onclick="playTrack('Lotus Flower.mp3')">Lotus Flower</div>
-        <div class="track" onclick="playTrack('Idioteque.mp3')">Idioteque</div>
-        <div class="track" onclick="playTrack('Street Spirit (Fade Out).mp3')">Street Spirit (Fade Out)</div>
+      <span onclick="nextTrack()" title="Next Track">Next</span>
+    </div>
+    <div id="playlist">
+      <div class="track" id="track0" onclick="playTrack(0)">Airbag</div>
+      <div class="track" id="track1" onclick="playTrack(1)">Burn the Witch</div>
+      <div class="track" id="track2" onclick="playTrack(2)">Everything In Its Right Place</div>
+      <div class="track" id="track3" onclick="playTrack(3)">There There</div>
+      <div class="track" id="track4" onclick="playTrack(4)">Let Down</div>
+      <div class="track" id="track5" onclick="playTrack(5)">Hail to the Thief</div>
+      <div class="track" id="track6" onclick="playTrack(6)">Jigsaw Falling Into Place (Radio Edit)</div>
+      <div class="track" id="track7" onclick="playTrack(7)">How to Disappear Completely</div>
+      <div class="track" id="track8" onclick="playTrack(8)">Lotus Flower</div>
+      <div class="track" id="track9" onclick="playTrack(9)">Idioteque</div>
+      <div class="track" id="track10" onclick="playTrack(10)">Street Spirit (Fade Out)</div>
 
-      </div>
     </div>
   </div>
 
@@ -81,18 +119,34 @@
     let current = 0;
     const audio = document.getElementById('audio');
 
-    function playTrack(src) {
-      audio.src = src;
+    function playTrack(index) {
+      current = index;
+      audio.src = tracks[current];
       audio.play();
+      updateTrackHighlight();
     }
 
-    audio.addEventListener('ended', () => {
+    function nextTrack() {
       current = (current + 1) % tracks.length;
-      playTrack(tracks[current]);
-    });
+      playTrack(current);
+    }
+
+    function previousTrack() {
+      current = (current - 1 + tracks.length) % tracks.length;
+      playTrack(current);
+    }
+
+    function updateTrackHighlight() {
+      document.querySelectorAll('.track').forEach((el, i) => {
+        el.classList.toggle('active', i === current);
+      });
+    }
+
+    audio.addEventListener('ended', nextTrack);
+    audio.addEventListener('play', updateTrackHighlight);
 
     // Start with the first track
-    playTrack(tracks[current]);
+    playTrack(current);
   </script>
 </body>
 </html>
