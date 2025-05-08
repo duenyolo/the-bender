@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Bender</title>
   <style>
     @font-face {
@@ -11,40 +11,31 @@
     }
 
     html, body {
-      height: 100%;
       margin: 0;
       padding: 0;
       background-color: black;
-    }
-    body {
       font-family: 'Microgramma', sans-serif;
-      background-image: url('albumart.png');
-      background-repeat: no-repeat;
-      background-position: top center;
-      background-size: contain;
       color: #fff;
-      text-align: center;
-      padding: 2em;
     }
-    .player-section {
-      position: relative;
-      margin-top: 50vh;
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 2em;
-      border-radius: 1em;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
+    .album-art {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .content {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 2em 1em;
+      text-align: center;
     }
     .player-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 2em;
+      gap: 1.2em;
       margin-bottom: 1.5em;
     }
     .player-wrapper span {
-      font-size: 1.4em;
+      font-size: 1em;
       color: #aaa;
       cursor: pointer;
       transition: color 0.2s ease;
@@ -53,7 +44,8 @@
       color: #fff;
     }
     audio {
-      width: 60%;
+      width: 80%;
+      max-width: 500px;
     }
     #playlist {
       text-align: left;
@@ -61,10 +53,10 @@
       max-width: 400px;
     }
     .track {
-      margin: 1.2em 0;
+      margin: 1em 0;
       cursor: pointer;
       color: #9cf;
-      font-size: 1.4em;
+      font-size: 1em;
       text-shadow: 0 0 4px #0ff;
       transition: all 0.2s ease;
     }
@@ -81,7 +73,8 @@
   </style>
 </head>
 <body>
-  <div class="player-section">
+  <img src="albumart.png" alt="The Bender Album Art" class="album-art">
+  <div class="content">
     <div class="player-wrapper">
       <span onclick="previousTrack()" title="Previous Track">Previous</span>
       <audio id="audio" controls autoplay></audio>
