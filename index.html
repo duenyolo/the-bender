@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Bender</title>
   <style>
     @font-face {
@@ -27,28 +27,26 @@
 
     .player-wrapper {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1em;
-      position: absolute;
-      top: 47vh;
-      left: 0;
-      right: 0;
-      z-index: 10;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  margin-top: 0.5em;   /* was 1em */
+  margin-bottom: 0.25em; /* was 1em */
+  z-index: 10;
     }
 
     .track-section {
       background-color: rgba(0, 0, 0, 0.7);
-      padding: 1em;
-      margin-top: 3em;
-      text-align: center;
+  padding: 0.5em 1em;
+  margin-top: -0.9em;
+  text-align: center;
     }
 
     audio {
       width: 85%;
       max-width: 500px;
-      
-      
+      filter: invert(1) hue-rotate(180deg);
+      border-radius: 1em;
     }
 
     #playlist {
@@ -110,43 +108,32 @@
   </style>
 </head>
 <body>
-  <img src="albumart.png" alt="The Bender Album Art" class="album-art">
+  <img src="albumart.png" alt="The Bender Album Art" class="album-art" />
 
   <div class="player-wrapper">
-   
-    <audio id="audio" controls></audio>
-   
+    <audio id="audio" controls preload="metadata"></audio>
   </div>
 
   <div class="track-section">
     <div id="playlist">
-      <div class="track" id="track0" onclick="playTrack(0)"><span class="track-number">&lt;01&gt;</span> airbag</div>
-      <div class="track" id="track1" onclick="playTrack(1)"><span class="track-number">&lt;02&gt;</span> burn the witch</div>
-      <div class="track" id="track2" onclick="playTrack(2)"><span class="track-number">&lt;03&gt;</span> everything in its right place</div>
-      <div class="track" id="track3" onclick="playTrack(3)"><span class="track-number">&lt;04&gt;</span> there there</div>
-      <div class="track" id="track4" onclick="playTrack(4)"><span class="track-number">&lt;05&gt;</span> let down</div>
-      <div class="track" id="track5" onclick="playTrack(5)"><span class="track-number">&lt;06&gt;</span> hail to the thief</div>
-      <div class="track" id="track6" onclick="playTrack(6)"><span class="track-number">&lt;07&gt;</span> jigsaw falling into place</div>
-      <div class="track" id="track7" onclick="playTrack(7)"><span class="track-number">&lt;08&gt;</span> how to disappear completely</div>
-      <div class="track" id="track8" onclick="playTrack(8)"><span class="track-number">&lt;09&gt;</span> lotus flower</div>
-      <div class="track" id="track9" onclick="playTrack(9)"><span class="track-number">&lt;10&gt;</span> idioteque</div>
-      <div class="track" id="track10" onclick="playTrack(10)"><span class="track-number">&lt;11&gt;</span> street spirit (fade out)</div>
+<div class="track" id="track0" onclick="playTrack(0)"><span class="track-number">&lt;01&gt;</span> airbag</div>
+<div class="track" id="track1" onclick="playTrack(1)"><span class="track-number">&lt;02&gt;</span> burn the witch</div>
+<div class="track" id="track2" onclick="playTrack(2)"><span class="track-number">&lt;03&gt;</span> everything in its right place</div>
+<div class="track" id="track3" onclick="playTrack(3)"><span class="track-number">&lt;04&gt;</span> there there</div>
+<div class="track" id="track4" onclick="playTrack(4)"><span class="track-number">&lt;05&gt;</span> let down</div>
+<div class="track" id="track5" onclick="playTrack(5)"><span class="track-number">&lt;06&gt;</span> fake plastic trees</div>
+<div class="track" id="track6" onclick="playTrack(6)"><span class="track-number">&lt;07&gt;</span> hail to the thief</div>
+<div class="track" id="track7" onclick="playTrack(7)"><span class="track-number">&lt;08&gt;</span> jigsaw falling into place</div>
+<div class="track" id="track8" onclick="playTrack(8)"><span class="track-number">&lt;09&gt;</span> how to disappear completely</div>
+<div class="track" id="track9" onclick="playTrack(9)"><span class="track-number">&lt;10&gt;</span> lotus flower</div>
+<div class="track" id="track10" onclick="playTrack(10)"><span class="track-number">&lt;11&gt;</span> idioteque</div>
+<div class="track" id="track11" onclick="playTrack(11)"><span class="track-number">&lt;12&gt;</span> street spirit (fade out)</div>
     </div>
   </div>
 
   <script>
     const tracks = [
-      "Airbag.mp3",
-      "Burn the Witch.mp3",
-      "Everything In Its Right Place.mp3",
-      "There There.mp3",
-      "Let Down.mp3",
-      "Hail to the Thief.mp3",
-      "Jigsaw Falling Into Place (Radio Edit).mp3",
-      "How to Disappear Completely.mp3",
-      "Lotus Flower.mp3",
-      "Idioteque.mp3",
-      "Street Spirit (Fade Out).mp3"
+      "Airbag.mp3", "Burn the Witch.mp3", "Everything In Its Right Place.mp3", "There There.mp3", "Let Down.mp3", "Fake Plastic Trees.mp3", "Hail to the Thief.mp3", "Jigsaw Falling Into Place (Radio Edit).mp3", "How to Disappear Completely.mp3", "Lotus Flower.mp3", "Idioteque.mp3", "Street Spirit (Fade Out).mp3"
     ];
     let current = 0;
     const audio = document.getElementById('audio');
@@ -177,7 +164,7 @@
     audio.addEventListener('ended', nextTrack);
     audio.addEventListener('play', updateTrackHighlight);
 
-    playTrack(current);
+    updateTrackHighlight();
   </script>
 </body>
 </html>
