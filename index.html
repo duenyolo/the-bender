@@ -15,36 +15,40 @@
       padding: 0;
       background-color: black;
       font-family: 'Microgramma', sans-serif;
-      color: #fff;
+      color: #fff; text-shadow: 0 0 6px #0ff;
     }
     .album-art {
       width: 100%;
-      height: auto;
+      max-height: 50vh;
+      object-fit: contain;
       display: block;
     }
     .content {
       background-color: rgba(0, 0, 0, 0.7);
-      padding: 2em 1em;
+      padding: 0.5em 1em;
       text-align: center;
     }
     .player-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1.2em;
-      margin-bottom: 1.5em;
+      gap: 1em;
+      margin-bottom: 0.8em;
     }
-    .player-wrapper span {
-      font-size: 1em;
-      color: #aaa;
+    /* removed .track-button styling */ .track-button { display: none; }
+      font-size: 0.95em;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #eee;
+      padding: 0.4em 0.8em;
+      border-radius: 5px;
       cursor: pointer;
-      transition: color 0.2s ease;
+      transition: background-color 0.2s ease;
     }
-    .player-wrapper span:hover {
-      color: #fff;
+    .track-button:hover {
+      background-color: rgba(255, 255, 255, 0.25);
     }
     audio {
-      width: 80%;
+      width: 85%;
       max-width: 500px;
     }
     #playlist {
@@ -53,45 +57,53 @@
       max-width: 400px;
     }
     .track {
-      margin: 1em 0;
+      margin: 0.8em 0;
       cursor: pointer;
-      color: #9cf;
-      font-size: 1em;
-      text-shadow: 0 0 4px #0ff;
+      color: #fff; text-shadow: 0 0 6px #0ff;
+      font-size: 0.95em;
+      
       transition: all 0.2s ease;
     }
     .track:hover {
-      color: #fff;
+      color: #fff; text-shadow: 0 0 6px #0ff;
       text-shadow: 0 0 6px #0ff;
     }
     .track.active {
-      color: #fff;
+      color: #fff; text-shadow: 0 0 6px #0ff;
       font-weight: bold;
       text-decoration: underline;
       text-shadow: 0 0 8px #0ff;
+    }
+
+    @media (min-width: 768px) {
+      .album-art {
+        max-height: 70vh;
+      }
     }
   </style>
 </head>
 <body>
   <img src="albumart.png" alt="The Bender Album Art" class="album-art">
-  <div class="content">
+  <div class="content" style="margin-top: 0;">
     <div class="player-wrapper">
       <span onclick="previousTrack()" title="Previous Track">Previous</span>
       <audio id="audio" controls autoplay></audio>
       <span onclick="nextTrack()" title="Next Track">Next</span>
     </div>
     <div id="playlist">
-      <div class="track" id="track0" onclick="playTrack(0)">Airbag</div>
-      <div class="track" id="track1" onclick="playTrack(1)">Burn the Witch</div>
-      <div class="track" id="track2" onclick="playTrack(2)">Everything In Its Right Place</div>
-      <div class="track" id="track3" onclick="playTrack(3)">There There</div>
-      <div class="track" id="track4" onclick="playTrack(4)">Let Down</div>
-      <div class="track" id="track5" onclick="playTrack(5)">Hail to the Thief</div>
-      <div class="track" id="track6" onclick="playTrack(6)">Jigsaw Falling Into Place (Radio Edit)</div>
-      <div class="track" id="track7" onclick="playTrack(7)">How to Disappear Completely</div>
-      <div class="track" id="track8" onclick="playTrack(8)">Lotus Flower</div>
-      <div class="track" id="track9" onclick="playTrack(9)">Idioteque</div>
-      <div class="track" id="track10" onclick="playTrack(10)">Street Spirit (Fade Out)</div>
+      <div class="track" id="track0" onclick="playTrack(0)"><01> airbag</div>
+      <div class="track" id="track1" onclick="playTrack(1)"><02> burn the witch</div>
+      <div class="track" id="track2" onclick="playTrack(2)"><03> everything in its right place</div>
+      <div class="track" id="track3" onclick="playTrack(3)"><04> there there</div>
+      <div class="track" id="track4" onclick="playTrack(4)"><05> let down</div>
+      <div class="track" id="track5" onclick="playTrack(5)"><06> hail to the thief</div>
+      <div class="track" id="track6" onclick="playTrack(6)"><07> jigsaw falling into place (radio edit)</div>
+      <div class="track" id="track7" onclick="playTrack(7)"><08> how to disappear completely</div>
+      <div class="track" id="track8" onclick="playTrack(8)"><09> lotus flower</div>
+      <div class="track" id="track9" onclick="playTrack(9)"><10> idioteque</div>
+      <div class="track" id="track10" onclick="playTrack(10)"><11> street spirit (fade out)</div>
+    </div>
+      
 
     </div>
   </div>
