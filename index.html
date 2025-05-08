@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Bender</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: black;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('albumart.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      padding: 2em;
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 2em;
+      border-radius: 1em;
+      max-width: 700px;
+      margin: auto;
+    }
+    audio {
+      width: 100%;
+      margin-top: 1em;
+    }
+    .track {
+      margin: 1em 0;
+      cursor: pointer;
+      color: #9cf;
+    }
+    .track:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>The Bender</h1>
+    <div id="player-container">
+      <audio id="audio" controls autoplay></audio>
+      <div id="playlist">
+        <div class="track" onclick="playTrack('Airbag.wav')">Airbag</div>
+        <div class="track" onclick="playTrack('Burn the Witch.wav')">Burn the Witch</div>
+        <div class="track" onclick="playTrack('Everything In Its Right Place.wav')">Everything In Its Right Place</div>
+        <div class="track" onclick="playTrack('There There.wav')">There There</div>
+        <div class="track" onclick="playTrack('Let Down.wav')">Let Down</div>
+        <div class="track" onclick="playTrack('Hail to the Thief.wav')">Hail to the Thief</div>
+        <div class="track" onclick="playTrack('Jigsaw Falling Into Place (Radio Edit).wav')">Jigsaw Falling Into Place (Radio Edit)</div>
+        <div class="track" onclick="playTrack('How to Disappear Completely.wav')">How to Disappear Completely</div>
+        <div class="track" onclick="playTrack('Lotus Flower.wav')">Lotus Flower</div>
+        <div class="track" onclick="playTrack('Idioteque.wav')">Idioteque</div>
+        <div class="track" onclick="playTrack('Street Spirit (Fade Out).wav')">Street Spirit (Fade Out)</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tracks = [
+      "Airbag.wav",
+      "Burn the Witch.wav",
+      "Everything In Its Right Place.wav",
+      "There There.wav",
+      "Let Down.wav",
+      "Hail to the Thief.wav",
+      "Jigsaw Falling Into Place (Radio Edit).wav",
+      "How to Disappear Completely.wav",
+      "Lotus Flower.wav",
+      "Idioteque.wav",
+      "Street Spirit (Fade Out).wav"
+    ];
+    let current = 0;
+    const audio = document.getElementById('audio');
+
+    function playTrack(src) {
+      audio.src = src;
+      audio.play();
+    }
+
+    audio.addEventListener('ended', () => {
+      current = (current + 1) % tracks.length;
+      playTrack(tracks[current]);
+    });
+
+    // Start with the first track
+    playTrack(tracks[current]);
+  </script>
+</body>
+</html>
