@@ -15,97 +15,122 @@
       padding: 0;
       background-color: black;
       font-family: 'Microgramma', sans-serif;
-      color: #fff; text-shadow: 0 0 6px #0ff;
+      color: #fff;
     }
+
     .album-art {
       width: 100%;
       max-height: 50vh;
       object-fit: contain;
       display: block;
-      margin-bottom: 0;
     }
-    .content {
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 0.5em 1em;
-      text-align: center;
-    }
+
     .player-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 1em;
-      margin-bottom: 0.5em;
+      position: absolute;
+      top: 47vh;
+      left: 0;
+      right: 0;
+      z-index: 10;
     }
-    /* removed .track-button styling */ .track-button { display: none; }
-      font-size: 0.95em;
-      background-color: rgba(255, 255, 255, 0.1);
-      color: #eee;
-      padding: 0.4em 0.8em;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
+
+    .track-section {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 1em;
+      margin-top: 3em;
+      text-align: center;
     }
-    .track-button:hover {
-      background-color: rgba(255, 255, 255, 0.25);
-    }
+
     audio {
       width: 85%;
       max-width: 500px;
+      
+      
     }
+
     #playlist {
       text-align: left;
       margin: 0 auto;
       max-width: 400px;
     }
+
     .track {
       margin: 0.1em 0;
       cursor: pointer;
-      color: #fff; text-shadow: 0 0 6px #0ff;
-      font-size: 0.7em;
-      
+      color: #fff;
+      font-size: 0.9em;
       transition: all 0.2s ease;
     }
+
     .track:hover {
-      color: #fff; text-shadow: 0 0 6px #0ff;
-      text-shadow: 0 0 6px #0ff;
-    }
-    .track.active {
-      color: #ff3030; text-shadow: 0 0 6px #0ff;
-      font-weight: bold;
-      text-decoration: underline;
-      text-shadow: 0 0 8px #0ff;
+      color: #fff;
     }
 
-    @media (min-width: 768px) {
-      .album-art {
-        max-height: 70vh;
-      }
+    .track.active {
+      color: red;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .track-number {
+      color: #fff;
+    }
+
+    .track.active .track-number {
+      color: red;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0.05) 2px,
+        transparent 2px,
+        transparent 4px
+      );
+      z-index: 999;
+    }
+
+    * {
+      text-shadow:
+        1px 0 red,
+       -1px 0 cyan,
+        0 0 2px #0ff;
     }
   </style>
 </head>
 <body>
   <img src="albumart.png" alt="The Bender Album Art" class="album-art">
-  <div class="content" style="margin-top: 0;">
-    <div class="player-wrapper">
-      <span onclick="previousTrack()" title="Previous Track">previous</span>
-      <audio id="audio" controls autoplay></audio>
-      <span onclick="nextTrack()" title="Next Track">next</span>
-    </div>
-    <div id="playlist">
-      <div class="track" id="track0" onclick="playTrack(0)"><01> airbag</div>
-      <div class="track" id="track1" onclick="playTrack(1)"><02> burn the witch</div>
-      <div class="track" id="track2" onclick="playTrack(2)"><03> everything in its right place</div>
-      <div class="track" id="track3" onclick="playTrack(3)"><04> there there</div>
-      <div class="track" id="track4" onclick="playTrack(4)"><05> let down</div>
-      <div class="track" id="track5" onclick="playTrack(5)"><06> hail to the thief</div>
-      <div class="track" id="track6" onclick="playTrack(6)"><07> jigsaw falling into place (radio edit)</div>
-      <div class="track" id="track7" onclick="playTrack(7)"><08> how to disappear completely</div>
-      <div class="track" id="track8" onclick="playTrack(8)"><09> lotus flower</div>
-      <div class="track" id="track9" onclick="playTrack(9)"><10> idioteque</div>
-      <div class="track" id="track10" onclick="playTrack(10)"><11> street spirit (fade out)</div>
-    </div>
-      
 
+  <div class="player-wrapper">
+   
+    <audio id="audio" controls></audio>
+   
+  </div>
+
+  <div class="track-section">
+    <div id="playlist">
+      <div class="track" id="track0" onclick="playTrack(0)"><span class="track-number">&lt;01&gt;</span> airbag</div>
+      <div class="track" id="track1" onclick="playTrack(1)"><span class="track-number">&lt;02&gt;</span> burn the witch</div>
+      <div class="track" id="track2" onclick="playTrack(2)"><span class="track-number">&lt;03&gt;</span> everything in its right place</div>
+      <div class="track" id="track3" onclick="playTrack(3)"><span class="track-number">&lt;04&gt;</span> there there</div>
+      <div class="track" id="track4" onclick="playTrack(4)"><span class="track-number">&lt;05&gt;</span> let down</div>
+      <div class="track" id="track5" onclick="playTrack(5)"><span class="track-number">&lt;06&gt;</span> hail to the thief</div>
+      <div class="track" id="track6" onclick="playTrack(6)"><span class="track-number">&lt;07&gt;</span> jigsaw falling into place</div>
+      <div class="track" id="track7" onclick="playTrack(7)"><span class="track-number">&lt;08&gt;</span> how to disappear completely</div>
+      <div class="track" id="track8" onclick="playTrack(8)"><span class="track-number">&lt;09&gt;</span> lotus flower</div>
+      <div class="track" id="track9" onclick="playTrack(9)"><span class="track-number">&lt;10&gt;</span> idioteque</div>
+      <div class="track" id="track10" onclick="playTrack(10)"><span class="track-number">&lt;11&gt;</span> street spirit (fade out)</div>
     </div>
   </div>
 
@@ -152,7 +177,6 @@
     audio.addEventListener('ended', nextTrack);
     audio.addEventListener('play', updateTrackHighlight);
 
-    // Start with the first track
     playTrack(current);
   </script>
 </body>
